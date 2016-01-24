@@ -8,9 +8,9 @@
 module.exports = {
 
   attributes: {
-title: 'string',  
-text: 'string',  
-category: 'string'  
+    title: 'string',  
+    text: 'string',  
+    category: 'string'  
   }
 };
 

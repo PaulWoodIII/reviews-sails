@@ -1,0 +1,21 @@
+[{
+    "color": "#EA8B3D",
+    "iconImage": "coffee_icon",
+    "title": "Coffee"
+}, {
+    "color": "#E35126",
+    "iconImage": "food_icon",
+    "title": "Food"
+}, {
+    "color": "#EB454F",
+    "iconImage": "exercise_sports",
+    "title": "Sports and Exercise"
+}, {
+    "color": "#EB4E93",
+    "iconImage": "nightlife_icon",
+    "title": "Night Life"
+}, {
+    "color": "#5CC7F9",
+    "iconImage": "meetup_icon",
+    "title": "Meetup"
+}]

@@ -20,5 +20,7 @@ module.exports = {
   // models: {
   //   connection: 'someMongodbServer'
   // }
-
+  ip: process.env.IP,
+  port: process.env.C9_PORT
+  
 };
