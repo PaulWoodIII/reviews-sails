@@ -6,7 +6,9 @@
   "keywords": [],
   "dependencies": {
     "bcryptjs": "^2.3.0",
+    "connect-redis": "^3.0.2",
     "ejs": "~0.8.4",
+    "fnv-plus": "^1.2.10",
     "grunt": "0.4.2",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-coffee": "~0.10.1",
@@ -22,16 +24,15 @@
     "include-all": "~0.1.3",
     "lodash": "^3.10.1",
     "passport": "^0.3.2",
+    "passport-http": "^0.3",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
+    "pluralize": "^1.0.1",
     "rc": "~0.5.0",
     "sails": "^0.12.0-rc7",
-    "sails-auth": "~2.1.3",
-    "sails-permissions": "~2.1.11",
     "sails-disk": "~0.10.0",
-    "sails-generate-auth": "^0.3.1",
-    "sails-permissions": "^2.1.11",
-    "validator": "^4.5.0"
+    "validator": "^4.5.0",
+    "waterline-criteria": "^0.11.1"
   },
   "scripts": {
     "debug": "node debug app.js",

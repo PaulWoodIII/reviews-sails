@@ -1,11 +1,11 @@
-// config/permissions.js
+module.exports.permissions = {
+  name: 'permissions',
 
-var _ = require('lodash');
-var _super = require('sails-permissions/config/permissions');
+  adminEmail: process.env.ADMIN_EMAIL || 'admin@example.com',
+  adminUsername: process.env.ADMIN_USERNAME || 'admin',
+  adminPassword: process.env.ADMIN_PASSWORD || 'Abc12345',
 
-_.merge(exports, _super);
-_.merge(exports, {
-
-  // Extend with custom logic here by adding additional fields, methods, etc.
-
-});
+  afterEvents: [
+    'hook:auth:initialized'
+  ]
+};
