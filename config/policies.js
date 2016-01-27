@@ -10,7 +10,7 @@ module.exports.policies = {
     'RolePolicy',
     'CriteriaPolicy'
   ],
-
+  DigitsController: true,
   AuthController: {
     '*': ['passport']
   },

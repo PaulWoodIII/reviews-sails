@@ -15,6 +15,11 @@ module.exports = {
       unique: true,
       index: true
     },
+    phoneNumber: {
+      type: 'string',
+      unique: true,
+      index: true
+    },
     passports: {
       collection: 'Passport',
       via: 'user'
