@@ -1,3 +1,5 @@
+var jwt = require('jsonwebtoken');
+
 /**
  * Authentication Controller
  */

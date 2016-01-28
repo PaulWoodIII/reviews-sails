@@ -64,7 +64,7 @@ module.exports = function permissions(sails) {
       })
       .then(() => {
         return sails.models.user.findOne({
-          email: sails.config.permissions.adminEmail
+          phoneNumber: sails.config.permissions.adminPhone
         });
       })
       .then(user => {

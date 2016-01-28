@@ -2,6 +2,7 @@ var path = require('path');
 var url = require('url');
 var passport = require('passport');
 var _ = require('lodash');
+var jwt = require('jsonwebtoken');
 
 /**
  * Passport Service
@@ -69,7 +70,7 @@ passport.connect = function(req, query, profile, next) {
   req.session.tokens = query.tokens;
 
   // Get the authentication provider from the query.
-  if (typeof query.provider === 'undefined'){
+  if (typeof query.provider === 'undefined') {
     query.provider = req.param('provider');
   }
 
@@ -111,6 +112,16 @@ passport.connect = function(req, query, profile, next) {
     provider: provider,
     identifier: query.identifier.toString()
   };
+  
+  var _secret = sails.config.session.secret;
+  var JWToken = function(user) {
+    var token = jwt.sign({
+      id: user.id
+    }, _secret);
+    // Set persistent cookie
+    req.session.tokens = [token];
+    return token;
+  };
 
   sails.models.passport.findOne(passportQuery)
     .then(function(passport) {
@@ -127,7 +138,13 @@ passport.connect = function(req, query, profile, next) {
               }, query));
             })
             .then(function(passport) {
-              next(null, user);
+              var token = JWToken(user);
+              var sessionResponse = {
+                success: true,
+                user: user[0],
+                token: token
+              };
+              next(null, sessionResponse);
             })
             .catch(next);
 
@@ -149,7 +166,13 @@ passport.connect = function(req, query, profile, next) {
               return sails.models.user.findOne(passport.user.id);
             })
             .then(function(user) {
-              next(null, user);
+              var token = JWToken(user);
+              var sessionResponse = {
+                success: true,
+                user: user[0],
+                token: token
+              };
+              next(null, sessionResponse);
             })
             .catch(next);
         }
@@ -163,18 +186,30 @@ passport.connect = function(req, query, profile, next) {
               user: req.user.id
             }, query))
             .then(function(passport) {
-              next(null, req.user);
+              var token = JWToken(user);
+              var sessionResponse = {
+                success: true,
+                user: user[0],
+                token: token
+              };
+              next(null, sessionResponse);
             })
             .catch(next);
         }
         // Scenario: The user is a nutjob or spammed the back-button.
         // Action:   Simply pass along the already established session.
         else {
-          next(null, req.user);
+          var token = JWToken(req.user);
+          var sessionResponse = {
+            success: true,
+            user: user[0],
+            token: token
+          };
+          next(null, sessionResponse);
         }
       }
     })
-    .catch(next)
+    .catch(next);
 };
 
 /**
@@ -350,9 +385,9 @@ passport.disconnect = function(req, res, next) {
     })
     .then(function(error) {
       next(null, user);
-      return user
+      return user;
     })
-    .catch(next)
+    .catch(next);
 };
 
 passport.serializeUser(function(user, next) {
@@ -365,7 +400,7 @@ passport.deserializeUser(function(id, next) {
       next(null, user || null);
       return user;
     })
-    .catch(next)
+    .catch(next);
 
 });
 

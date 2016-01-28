@@ -1,8 +1,7 @@
 module.exports.policies = {  
   '*': [
-    'basicAuth',
+    'hasToken',
     'passport',
-    'sessionAuth',
     'ModelPolicy',
     'AuditPolicy',
     'OwnerPolicy',
